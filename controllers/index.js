@@ -9,13 +9,29 @@ exports.getOpenAIResponse = async (req, res) => {
   //   instructions: "You are a personal indian nutritionist.",
   //   model: "gpt-4-1106-preview"
   // });
+  const assistant = {
+        "id": "asst_QhMYvQAEExyDGu0QEDYqlzQd",
+        "object": "assistant",
+        "created_at": 1704388383,
+        "name": "Visit AI",
+        "description": null,
+        "model": "gpt-4-1106-preview",
+        "instructions": "You are a personal indian nutritionist.",
+        "tools": [],
+        "file_ids": [],
+        "metadata": {}
+    }
+
+    const myAssistant = await openai.beta.assistants.retrieve(
+      assistant.id
+    );
   // const thread = await openai.beta.threads.create();
-  const thread = {
-    "id": "thread_U1iAxTHm9HBSBjZKZaFFP8zp",
-    "object": "thread",
-    "created_at": 1704133519,
-    "metadata": {}
-  }
+  // const thread = {
+  //   "id": "thread_U1iAxTHm9HBSBjZKZaFFP8zp",
+  //   "object": "thread",
+  //   "created_at": 1704133519,
+  //   "metadata": {}
+  // }
   // const message = await openai.beta.threads.messages.create(
   //   thread.id,
   //   {
@@ -24,9 +40,9 @@ exports.getOpenAIResponse = async (req, res) => {
   //   }
   // );
 
-  const messages = await openai.beta.threads.messages.list(
-    thread.id
-  );
+  // const messages = await openai.beta.threads.messages.list(
+  //   thread.id
+  // );
 
   // const run = await openai.beta.threads.runs.create(
   //   thread.id,
@@ -36,7 +52,9 @@ exports.getOpenAIResponse = async (req, res) => {
   //   }
   // );
   // res.json({assistant: assistant, thread: thread, message: message})
-  res.json({message: messages})
+  // res.json({message: messages})
+  // res.json({assistant: assistant})
+  res.json({assistant: myAssistant})
 }
 
 module.exports = exports;
